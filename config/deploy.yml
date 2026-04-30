@@ -1,10 +1,10 @@
 <% require "dotenv"; Dotenv.load(".env") %>
 
 # Name of your application. Used to uniquely configure containers.
-service: kamal_course_sqlite
+service: kamal-course-sqlite
 
 # Name of the container image (use your-user/app-name on external registries).
-image: kamal_course_sqlite
+image: jacksonpires/kamal-course-sqlite
 
 # Deploy to these servers.
 servers:
@@ -28,8 +28,13 @@ servers:
 
 # Where you keep your container images.
 registry:
+  server: ghcr.io
+  username: <%= ENV["GHCR_USERNAME"] %>
+  password:
+    - GHCR_TOKEN
+
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
-  server: localhost:5555
+  # server: localhost:5555
 
   # Needed for authenticated registries.
   # username: your-user
