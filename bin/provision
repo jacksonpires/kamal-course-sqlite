@@ -26,13 +26,6 @@ install_essentials = <<~EOF
   apt install -y docker.io curl unattended-upgrades
 EOF
 
-# Prepare DB
-prepare_db = <<~EOF
-  mkdir -p /db;
-  chmod 700 /db;
-  chown 1000:1000 /db
-EOF
-
 # Prepare storage
 prepare_storage = <<~EOF
   mkdir -p /storage;
@@ -107,8 +100,6 @@ hosts.each do |host|
     ssh.exec!(install_essentials)
     puts "Adding swap space..."
     ssh.exec!(add_swap)
-    puts "Preparing db for sqlite..."
-    ssh.exec!(prepare_db)
     puts "Preparing storage for disk service..."
     ssh.exec!(prepare_storage)
     puts "Adding user with sudo privileges..."
